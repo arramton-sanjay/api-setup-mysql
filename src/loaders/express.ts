@@ -3,6 +3,7 @@ import cors from 'cors';
 // import methodOverride from 'method-override';
 import morgan from 'morgan';
 import HttpStatus from 'http-status-codes';
+import apiRouter from '../api/index'
 // import Response from '../utilities/Response';
 // import router from '../api';
 import { Application, Request, Response as ExpressResponse, NextFunction } from 'express';
@@ -42,7 +43,7 @@ export default ({ app }: { app: Application }) => {
 	app.use(bodyParser.json({ limit: '100mb', type: 'application/json' }));
 
 	// Load API routes
-	// router(app);
+	apiRouter(app);
 
 	// catch 404 and forward to error handler
 	app.use((req: Request, res: ExpressResponse, next: NextFunction) => {
