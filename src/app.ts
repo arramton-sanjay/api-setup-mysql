@@ -3,7 +3,7 @@ import { Server } from 'http';
 import path from 'path';
 import initLoader from './loaders/index';
 import knex, { Knex } from 'knex';
-
+import config from './config';
 declare global {
 	var appRoot: string;
 	var knexInstance: Knex;
@@ -20,13 +20,12 @@ process.on('uncaughtException', (error: Error) => {
 	try {
 		const app: Express = express();
 		app.use(express.static(path.join(__dirname, '..', 'public')));
-
-		const server: Server = app.listen(4000, (err?: Error) => {
+		const server: Server = app.listen(config.port, (err?: Error) => {
 			if (err) {
 				process.exit(1);
 				return;
 			}
-			console.log('Server started on port 4000');
+			console.log(`Server started on port ${config.port}`);
 		});
 
 		await initLoader({ expressApp: app, server });

@@ -1,3 +1,4 @@
+import './loadEnv'
 const config = {
   IsLocal: process.env.NODE_ENV === 'local',
   IsProd: process.env.NODE_ENV === 'prod',
