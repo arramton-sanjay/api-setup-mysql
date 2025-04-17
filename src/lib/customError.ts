@@ -24,7 +24,6 @@ export class CustomError extends Error {
     this.resCode = resCode ?? code;
     this.extra = extra;
 
-    // Necessary for `instanceof CustomError` to work correctly
     Object.setPrototypeOf(this, CustomError.prototype);
   }
 }

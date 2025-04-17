@@ -56,7 +56,7 @@ export class CustomResponse {
 	}
 
 	static fail({ res, message, code = StatusCodes.NOT_FOUND, resCode = StatusCodes.NOT_FOUND, extra = {} }: IFailedResponse) {
-		const resObj: IBaseResponse<Record<null, null>> = { success: false, message: '', data: {}, code: 200, resCode: 200, extra: {} };
+		const resObj: IBaseResponse<Record<null, null>> = { success: false, message: '', code: 200, resCode: 200 };
 
 		if (isTMessageObject(message)) {
 			resObj.message = message.message || 'failed';

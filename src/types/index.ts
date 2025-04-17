@@ -10,12 +10,12 @@ export interface IPagination {
     currentPage?: number;
     nextPage?: number | null;
 }
-export interface IBaseResponse<T = string, M = string> {
+export interface IBaseResponse<T = Record<string, any> | any[], M = string> {
     status?: boolean;
     success?: boolean;
     name?: string;
     message: M;
-    data: T;
+    data?: T;
     code: number;
     resCode?: number;
     extra?: {
