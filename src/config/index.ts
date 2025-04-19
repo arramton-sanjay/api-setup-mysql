@@ -2,7 +2,12 @@ import './loadEnv'
 const config = {
   IsLocal: process.env.NODE_ENV === 'local',
   IsProd: process.env.NODE_ENV === 'prod',
-
+  // winston lore:
+  logs: {
+    level: process.env.LOG_LEVEL || 'info',
+  },
+  TempFileDir: `${__dirname}/../../${process.env.TEMP_UPLOAD_DIR}`,
+  logDir: process.env.LOG_DIR,
   port: parseInt(process.env.PORT || '3000', 10),
   database: {
     host: process.env.DB_HOSTNAME,

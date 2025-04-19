@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 import * as fs from 'fs';
 
-const NODE_ENV = process.env.NODE_ENV || 'dev';
+const NODE_ENV = process.env.NODE_ENV || 'dev'; // this NODE_ENV is getting set from package.json script so check that !!
 
 const envPath = path.resolve(process.cwd(), `.env.${NODE_ENV}`);
 
