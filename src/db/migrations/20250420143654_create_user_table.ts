@@ -8,9 +8,9 @@ export async function up(knex: Knex): Promise<void> {
         table
             .enum('type', ['Super Admin', 'Sub Admin', 'Dealer'])
             .notNullable();
-        table.integer('countryId').unsigned().nullable();
-        table.integer('stateId').unsigned().nullable();
-        table.integer('cityId').unsigned().nullable();
+        // table.integer('countryId').unsigned().nullable();
+        // table.integer('stateId').unsigned().nullable();
+        // table.integer('cityId').unsigned().nullable();
         table.string('code', 20).nullable();
         table.string('firstName', 255).notNullable();
         table.string('lastName', 255).notNullable();
@@ -24,30 +24,30 @@ export async function up(knex: Knex): Promise<void> {
         table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now());
         table.timestamp('deletedAt').nullable();
 
-        table.index(['countryId'], 'countryId');
-        table.index(['stateId'], 'stateId');
-        table.index(['cityId'], 'cityId');
+        // table.index(['countryId'], 'countryId');
+        // table.index(['stateId'], 'stateId');
+        // table.index(['cityId'], 'cityId');
 
-        table
-            .foreign('countryId')
-            .references('id')
-            .inTable('countries')
-            .onDelete('SET NULL')
-            .onUpdate('CASCADE');
+        // table
+        //     .foreign('countryId')
+        //     .references('id')
+        //     .inTable('countries')
+        //     .onDelete('SET NULL')
+        //     .onUpdate('CASCADE');
 
-        table
-            .foreign('stateId')
-            .references('id')
-            .inTable('states')
-            .onDelete('SET NULL')
-            .onUpdate('CASCADE');
+        // table
+        //     .foreign('stateId')
+        //     .references('id')
+        //     .inTable('states')
+        //     .onDelete('SET NULL')
+        //     .onUpdate('CASCADE');
     
-        table
-            .foreign('cityId')
-            .references('id')
-            .inTable('cities')
-            .onDelete('SET NULL')
-            .onUpdate('CASCADE');
+        // table
+        //     .foreign('cityId')
+        //     .references('id')
+        //     .inTable('cities')
+        //     .onDelete('SET NULL')
+        //     .onUpdate('CASCADE');
     });
 }
 

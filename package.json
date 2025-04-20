@@ -5,13 +5,15 @@
   "scripts": {
     "build": "tsc",
     "watch-ts": "npx tsc -w",
-    "dev": "cross-env NODE_ENV=dev nodemon dist/app.js",
-    "start": "cross-env NODE_ENV=prod node dist/app.js",
+    "dev": "cross-env NODE_ENV=dev nodemon dist/src/app.js",
+    "start": "cross-env NODE_ENV=prod node dist/src/app.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
     "migrate": "knex --knexfile knexfile.ts migrate:latest",
+    "migrate:custom": "npx ts-node src/scripts/knexMigrationRunner.ts",
+    "migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

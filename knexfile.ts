@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 import Config from './src/config'; 
-
+import path from 'path'
 const knexConfig: Knex.Config = {
   client: 'mysql2', 
   connection: {
@@ -14,10 +14,10 @@ const knexConfig: Knex.Config = {
     max: 50,
   },
   migrations: {
-    directory: './db/migrations',
+    directory: path.join(__dirname, '/src/db/migrations'),
   },
   seeds: {
-    directory: './db/seeds',
+    directory:  path.join(__dirname, '/src/db/seeds'),
   },
   debug: true,
 };
