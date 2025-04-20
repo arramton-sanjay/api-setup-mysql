@@ -33,8 +33,6 @@ class Logger {
 		level = 'info',
 		defaultMeta = {},
 	}: LoggerInitOptions = {}): void {
-        console.log(`🔴 ${Config.logDir}/app.%DATE%.log`, 'Logger')
-
 		if (!_.isArray(transports)) {
 			throw new Error('transports is not an array');
 		}

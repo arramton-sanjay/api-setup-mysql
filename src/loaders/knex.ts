@@ -1,5 +1,6 @@
 import knex, { Knex } from 'knex';
 import Config from '../config';
+import path from 'path';
 
 class KnexDB {
 	static connectKnex(): Knex {
@@ -14,6 +15,12 @@ class KnexDB {
 			pool: {
 				min: 0,
 				max: 50,
+			},
+			migrations:{
+				directory: path.resolve(__dirname, '../../db/migrations')
+			},
+			seeds:{
+				directory: path.resolve(__dirname, '../../db/seeds')
 			},
 			acquireConnectionTimeout: 60 * 1000 * 60,
 			debug: false,

@@ -9,6 +9,8 @@
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
+    "strict": true,
+    "resolveJsonModule": true,
     "paths": {
       "*": [
         "node_modules/*",
@@ -17,6 +19,7 @@
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "knexfile.ts"
   ]
 }

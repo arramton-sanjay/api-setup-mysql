@@ -1,23 +1,25 @@
-import type { Knex } from "knex";
+import { Knex } from 'knex';
+import Config from './src/config'; 
 
-const dbConfig: { [key: string]: Knex.Config } = {
-  development: {
-    client: "pg",
-    connection: {
-      host: "127.0.0.1",
-      user: "your_db_user",
-      password: "your_db_password",
-      database: "your_db_name",
-    },
-    migrations: {
-      directory: "./src/db/migrations",
-      extension: "ts",
-    },
-    seeds: {
-      directory: "./src/db/seeds",
-      extension: "ts",
-    },
+const knexConfig: Knex.Config = {
+  client: 'mysql2', 
+  connection: {
+    host: Config.database.host,
+    user: Config.database.user,
+    password: Config.database.password,
+    database: Config.database.name,
   },
+  pool: {
+    min: 0,
+    max: 50,
+  },
+  migrations: {
+    directory: './db/migrations',
+  },
+  seeds: {
+    directory: './db/seeds',
+  },
+  debug: true,
 };
 
-export default dbConfig;
+export default knexConfig;
