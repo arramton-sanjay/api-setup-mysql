@@ -9,7 +9,7 @@ interface LoaderParams {
 }
 
 const loader = async function ({ expressApp, server }: LoaderParams): Promise<void> {
-	await knex.connect();
+	global.knexInstance = await knex.connect();
 	Logger.info('🟡 Knex Loaded Successfully !!');
 	console.log('✌️ Knex loaded and connected!');
 	

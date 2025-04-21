@@ -2,11 +2,12 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 // import methodOverride from 'method-override';
 import morgan from 'morgan';
-import HttpStatus from 'http-status-codes';
+import HttpStatus, { StatusCodes } from 'http-status-codes';
 import apiRouter from '../api/index'
 // import Response from '../utilities/Response';
 // import router from '../api';
 import { Application, Request, Response as ExpressResponse, NextFunction } from 'express';
+import { CustomResponse } from '../lib/api-response';
 
 interface ErrorWithStatus extends Error {
 	status?: number;
@@ -58,7 +59,8 @@ export default ({ app }: { app: Application }) => {
 		 * Handle 401 thrown by express-jwt library
 		 */
 		if (err.name === 'UnauthorizedError') {
-			// return Response.fail(res, err.message, err.status);
+			return CustomResponse.fail({res, message: err.message, code: StatusCodes.INTERNAL_SERVER_ERROR});
+
 		}
 
 		/*
@@ -66,8 +68,9 @@ export default ({ app }: { app: Application }) => {
 		 */
 		if (err.name === 'MulterError') {
 			// return Response.fail(res, err.message, HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR);
+			return CustomResponse.fail({res, message: err.message, code: StatusCodes.INTERNAL_SERVER_ERROR});
 		}
-		// return Response.fail(res, err.message, err.code || HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR, null, err.extra);
+		return CustomResponse.fail({res, message: err.message, code: err.code || StatusCodes.INTERNAL_SERVER_ERROR, data: {}, extra: err.extra});
 	});
 
 	app.use((err: ErrorWithStatus, req: Request, res: ExpressResponse) => {

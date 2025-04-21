@@ -19,7 +19,7 @@ export default class SuperAdminController {
                     name: 'CustomValidationError',
                     data: null
                 }
-            });;
+            });
 
 
             res.status(response.code).json(response);

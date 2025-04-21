@@ -14,7 +14,7 @@ function isTMessageObject(obj: any): obj is TMessageObject {
 }
 export class CustomResponse {
 	static success({ res, message, data, code, extra }: ISuccessResponse) {
-		const resObj: IBaseResponse<Record<null, null>> = { success: true, message: '', data: {}, code: 200, extra: {} };
+		const resObj: IBaseResponse<Record<null, null>> = { success: true, message: '', code: 200 };
 
 		if (isTMessageObject(message)) {
 			resObj.message = message.message || 'success';
@@ -56,7 +56,7 @@ export class CustomResponse {
 	}
 
 	static fail({ res, message, code = StatusCodes.NOT_FOUND, resCode = StatusCodes.NOT_FOUND, extra = {} }: IFailedResponse) {
-		const resObj: IBaseResponse<Record<null, null>> = { success: false, message: '', code: 200, resCode: 200 };
+		const resObj: IBaseResponse<Record<null, null>> = { success: false, message: '', code: 200};
 
 		if (isTMessageObject(message)) {
 			resObj.message = message.message || 'failed';

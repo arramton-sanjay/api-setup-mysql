@@ -1,4 +1,4 @@
-import knex, { Knex } from 'knex';
+import knex, { Knex, } from 'knex';
 import config from '../config';
 import path from 'path';
 
@@ -31,7 +31,7 @@ class KnexDB {
       });
 
       KnexDB.instance.on('query', ({ sql, bindings }) => {
-        // console.log('[db]', KnexDB.instance?.raw(sql, bindings).toQuery());
+        console.log('[db]', KnexDB.instance?.raw(sql, bindings).toQuery());
       });
     }
     return KnexDB.instance;
