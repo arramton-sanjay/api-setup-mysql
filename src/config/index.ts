@@ -2,6 +2,10 @@ import './loadEnv'
 const config = {
   IsLocal: process.env.NODE_ENV === 'local',
   IsProd: process.env.NODE_ENV === 'prod',
+  api_version:{
+    admin: process.env.API_VERSION_ADMIN || 'v1',
+    app: process.env.API_VERSION_APP || 'v1',
+  },
   // winston lore:
   logs: {
     level: process.env.LOG_LEVEL || 'info',

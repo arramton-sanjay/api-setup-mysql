@@ -1,6 +1,7 @@
 
 import { StatusCodes } from 'http-status-codes';
 enum MessageEnums {
+    API_STATUS = 'api_status',
     DATA_SAVED = 'dataSaved',
     DATA_NOT_SAVED = 'dataNotSaved',
     DATA_FOUND = 'dataFound',
@@ -15,6 +16,11 @@ interface ErrorObj {
     code: StatusCodes
 }
 export const Message: Record<MessageEnums, ErrorObj> = {
+    [MessageEnums.API_STATUS]: {
+        code: StatusCodes.OK,
+        message: 'Yay!! API is working',
+        name: MessageEnums.API_STATUS
+    },
     [MessageEnums.DATA_SAVED]: {
         code: StatusCodes.OK,
         message: 'Data Saved Successfully',

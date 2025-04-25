@@ -1,4 +1,4 @@
-import { Iextra } from "index"
+import { Iextra } from "./index"
 
 export type TUser = {
     email: string,

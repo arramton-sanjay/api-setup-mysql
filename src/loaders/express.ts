@@ -1,12 +1,10 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
-// import methodOverride from 'method-override';
+import { StatusCodes } from 'http-status-codes';
 import morgan from 'morgan';
-import HttpStatus, { StatusCodes } from 'http-status-codes';
-import apiRouter from '../api/index'
-// import Response from '../utilities/Response';
-// import router from '../api';
-import { Application, Request, Response as ExpressResponse, NextFunction } from 'express';
+import adminRoutes from '../packages/admin/v1/index';
+import { Application, Response as ExpressResponse, NextFunction, Request } from 'express';
+import config from '../config';
 import { CustomResponse } from '../lib/api-response';
 
 interface ErrorWithStatus extends Error {
@@ -14,7 +12,8 @@ interface ErrorWithStatus extends Error {
 	code?: number;
 	extra?: any;
 }
-
+const ADMIN_BASE_URL = `/api/${config.api_version.admin}/admin` 
+const APP_BASE_URL = `/api/${config.api_version.app}/app` 
 export default ({ app }: { app: Application }) => {
 	/*
 		|--------------------------------------------------------------------------
@@ -44,7 +43,7 @@ export default ({ app }: { app: Application }) => {
 	app.use(bodyParser.json({ limit: '100mb', type: 'application/json' }));
 
 	// Load API routes
-	apiRouter(app);
+	app.use(ADMIN_BASE_URL, adminRoutes)
 
 	// catch 404 and forward to error handler
 	app.use((req: Request, res: ExpressResponse, next: NextFunction) => {
@@ -59,7 +58,7 @@ export default ({ app }: { app: Application }) => {
 		 * Handle 401 thrown by express-jwt library
 		 */
 		if (err.name === 'UnauthorizedError') {
-			return CustomResponse.fail({res, message: err.message, code: StatusCodes.INTERNAL_SERVER_ERROR});
+			return CustomResponse.fail({ res, message: err.message, code: StatusCodes.INTERNAL_SERVER_ERROR });
 
 		}
 
@@ -68,9 +67,9 @@ export default ({ app }: { app: Application }) => {
 		 */
 		if (err.name === 'MulterError') {
 			// return Response.fail(res, err.message, HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR);
-			return CustomResponse.fail({res, message: err.message, code: StatusCodes.INTERNAL_SERVER_ERROR});
+			return CustomResponse.fail({ res, message: err.message, code: StatusCodes.INTERNAL_SERVER_ERROR });
 		}
-		return CustomResponse.fail({res, message: err.message, code: err.code || StatusCodes.INTERNAL_SERVER_ERROR, data: {}, extra: err.extra});
+		return CustomResponse.fail({ res, message: err.message, code: err.code || StatusCodes.NOT_FOUND, data: {}, extra: err.extra });
 	});
 
 	app.use((err: ErrorWithStatus, req: Request, res: ExpressResponse) => {
